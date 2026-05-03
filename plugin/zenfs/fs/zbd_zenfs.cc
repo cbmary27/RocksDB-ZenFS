@@ -60,6 +60,7 @@ Zone::Zone(ZonedBlockDevice *zbd, ZonedBlockDeviceBackend *zbd_be,
   used_capacity_ = 0;
   capacity_ = 0;
   effective_wp = 0;
+  //c: update
   is_finished = false; //c: update
   if (zbd_be->ZoneIsWritable(zones, idx))
     capacity_ = max_capacity_ - (wp_ - start_);
@@ -100,7 +101,7 @@ IOStatus Zone::Reset() {
   wp_ = start_;
   lifetime_ = Env::WLTH_NOT_SET;
 
-  is_finished = false; //c: update
+  is_finished = false; //c: updating the zone is not finished after reset
 
   return IOStatus::OK();
 }
@@ -111,7 +112,7 @@ IOStatus Zone::Finish() {
   IOStatus ios = zbd_be_->Finish(start_);
   if (ios != IOStatus::OK()) return ios;
 
-  //c: storing the wp before it is updated in Finish
+  //c: storing the wp before it is updated in Finish()
   effective_wp = wp_;
 
   capacity_ = 0;
@@ -380,6 +381,8 @@ void ZonedBlockDevice::LogGarbageInfo() {
           double(z->wp_ - z->start_ - z->used_capacity_) / z->max_capacity_;
     }
 
+    //c: calculating the garbage bytes for this zone based 
+    // on the garbage rate and the zone capacity
     //c: we want to get the garbage bytes across all the zones (accumulating)
     //c: is used_capacity the valid data?
     if (z->IsFull()) {
