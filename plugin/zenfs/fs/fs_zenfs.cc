@@ -331,6 +331,7 @@ void ZenFS::GCWorker() {
 //c: this is the worker function for logging garbage info for GC off
 void ZenFS::GarbageLoggerWorker() {
   while (log_worker_) {
+    //logging every one second
     std::this_thread::sleep_for(std::chrono::seconds(1));
     zbd_->LogGarbageInfo();
   }
@@ -1506,11 +1507,12 @@ Status ZenFS::Mount(bool readonly) {
       gc_worker_.reset(new std::thread(&ZenFS::GCWorker, this));
     }
     else
-{
-     Info(logger_, "GC is disabled");
-      log_worker_ = true;
-      no_gc_worker_.reset(new std::thread(&ZenFS::GarbageLoggerWorker, this));
-}
+    //c: for logging garbage info with no GC
+    {
+        Info(logger_, "GC is disabled");
+          log_worker_ = true;
+          no_gc_worker_.reset(new std::thread(&ZenFS::GarbageLoggerWorker, this));
+    }
   }
 
   LogFiles();

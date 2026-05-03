@@ -149,7 +149,7 @@ class ZenFS : public FileSystemWrapper {
   std::unique_ptr<std::thread> gc_worker_ = nullptr;
   bool run_gc_worker_ = false;
 
-  //c: updating for no GC
+  //c: this is for logging garbage info with GC off
   std::unique_ptr<std::thread> no_gc_worker_ = nullptr;
   bool log_worker_ = false;
 
