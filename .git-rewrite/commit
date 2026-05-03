@@ -1,0 +1,16 @@
+tree ee1db7360931bbfa7b362c6e2df0830316d6ec64
+parent d394a6bb48b79b13822702cd5af8a0d85a2fd8f8
+author Sagar Vemuri <svemuri@fb.com> 1511248786 -0800
+committer Facebook Github Bot <facebook-github-bot@users.noreply.github.com> 1511249175 -0800
+
+Blob DB: db_bench flag to control BlobDB's garbage collection
+
+Summary:
+flag: blob_db_enable_gc, to control BlobDb's enable_garbage_collection.
+Closes https://github.com/facebook/rocksdb/pull/3190
+
+Differential Revision: D6383395
+
+Pulled By: sagar0
+
+fbshipit-source-id: 4134e835150748c425b8187264273a54c6d8381c

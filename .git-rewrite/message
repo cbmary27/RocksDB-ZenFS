@@ -1,0 +1,11 @@
+Blob DB: db_bench flag to control BlobDB's garbage collection
+
+Summary:
+flag: blob_db_enable_gc, to control BlobDb's enable_garbage_collection.
+Closes https://github.com/facebook/rocksdb/pull/3190
+
+Differential Revision: D6383395
+
+Pulled By: sagar0
+
+fbshipit-source-id: 4134e835150748c425b8187264273a54c6d8381c
