@@ -201,8 +201,11 @@ Verify `PKG_CONFIG_PATH` includes the correct path and that the install step in 
 
 ```bash
 sudo nvme zns reset-zone /dev/nvme0n1 -a
+
 rm -rf /home/femu/rocksdbTest/zenfs_aux/*
+
 echo mq-deadline | sudo tee /sys/class/block/nvme0n1/queue/scheduler
+
 bash db_bench_scripts/test_ft_single.sh
 ```
 
