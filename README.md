@@ -1,6 +1,6 @@
 # RocksDB + ZenFS Installation Guide
 
-A step-by-step guide for building RocksDB with the ZenFS plugin on a zoned block device (e.g., NVMe ZNS).
+A step-by-step guide for building RocksDB with the ZenFS plugin on a zoned block device (e.g., NVMe ZNS) for [ConfZNS++](https://github.com/cbmary27/ZNS_AnalyzingZoneSize.git)
 
 **Reference:** [ZenFS README](https://github.com/westerndigitalcorporation/zenfs/blob/master/README.md)
 
