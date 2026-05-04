@@ -23,8 +23,15 @@ A step-by-step guide for building RocksDB with the ZenFS plugin on a zoned block
 | `./plugin/zenfs/util/` | ZenFS CLI utility source |
 
 ---
-Follow the steps outlined in the link below:
+Follow the steps outlined (except for cloning the RocksDB repo, follow the step written below this) in the link below:
 [ZenFS README](https://github.com/westerndigitalcorporation/zenfs/blob/master/README.md)
+
+## Cloning RocksDB-ZenFS repo to reproduce the experiments:
+
+```bash
+git clone https://github.com/cbmary27/RocksDB-ZenFS.git
+cd RocksDB-ZenFS
+```
 
 The rest of the steps below detail what we did to make it work on the virtual machine:
 
@@ -187,3 +194,13 @@ Confirm the I/O scheduler is set to `mq-deadline` (Step 7) and the device path (
 
 **`pkg-config` can't find RocksDB**
 Verify `PKG_CONFIG_PATH` includes the correct path and that the install step in Step 4 completed without errors.
+
+---
+
+## Testing (With dbbench benchmarking tool)
+
+1. sudo nvme zns reset-zone /dev/nvme0n1 -a
+2. rm -rf /home/femu/rocksdbTest/zenfs_aux/*
+3. echo mq-deadline | sudo tee /sys/class/block/nvme0n1/queue/scheduler
+4. bash db_bench_scripts/test_ft_single.sh
+
