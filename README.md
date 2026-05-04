@@ -8,11 +8,24 @@ A step-by-step guide for building RocksDB with the ZenFS plugin on a zoned block
 
 ## Prerequisites
 
+- Linux Kernel version 5.9 or newer is required
 - GCC 11.2.0 (installed below)
 - A zoned block device (e.g., `nvme0n1`)
 - Ubuntu/Debian-based system
 
+## Directory Structure
+
+| Path | Purpose |
+|------|---------|
+| `/home/femu/rocksdbTest/rocksdbInstall` | RocksDB install prefix |
+| `/home/femu/rocksdbTest/zenfs_aux` | ZenFS auxiliary metadata path |
+| `plugin/zenfs/util/` | ZenFS CLI utility source |
+
 ---
+Follow the steps outlined in the link below:
+[ZenFS README](https://github.com/westerndigitalcorporation/zenfs/blob/master/README.md)
+
+The rest of the steps below detail what we did to make it work on the virtual machine:
 
 ## 1. Set Up GCC 11
 
@@ -46,6 +59,8 @@ echo $CXX   # Should output: g++-11
 ---
 
 ## 2. Install libzbd Dependencies
+
+[libzbd](https://github.com/westerndigitalcorporation/libzbd/blob/master/README.md)
 
 ```bash
 sudo apt update
@@ -95,10 +110,6 @@ make -j8 db_bench install \
 PREFIX=/home/femu/rocksdbTest/rocksdbInstall \
 EXTRA_LDFLAGS="-lgflags -lsnappy -lz -lbz2 -llz4 -lzstd -ljemalloc"
 ```
-
-> **Alternative install path** (if using `/home/femu/RocksDBFile/rocksdb-install`):
-> Replace `PREFIX=/home/femu/rocksdbTest/rocksdbInstall` accordingly.
-
 ---
 
 ## 5. Configure PKG_CONFIG_PATH
@@ -160,18 +171,6 @@ export PKG_CONFIG_PATH=/home/femu/rocksdbTest/rocksdbInstall/lib/pkgconfig:$PKG_
 # 2. Set the I/O scheduler for the ZNS device
 echo mq-deadline | sudo tee /sys/class/block/nvme0n1/queue/scheduler
 ```
-
----
-
-## Directory Structure
-
-| Path | Purpose |
-|------|---------|
-| `/home/femu/rocksdbTest/rocksdbInstall` | RocksDB install prefix |
-| `/home/femu/rocksdbTest/zenfs_aux` | ZenFS auxiliary metadata path |
-| `/home/femu/RocksDBFile/rocksdb-install` | Alternative install path (legacy) |
-| `plugin/zenfs/util/` | ZenFS CLI utility source |
-
 ---
 
 ## Troubleshooting
