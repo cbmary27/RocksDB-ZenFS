@@ -17,9 +17,10 @@ A step-by-step guide for building RocksDB with the ZenFS plugin on a zoned block
 
 | Path | Purpose |
 |------|---------|
+| `/home/femu/rocksdbTest` | Main directory. Clone the repo in this directory |
 | `/home/femu/rocksdbTest/rocksdbInstall` | RocksDB install prefix |
 | `/home/femu/rocksdbTest/zenfs_aux` | ZenFS auxiliary metadata path |
-| `plugin/zenfs/util/` | ZenFS CLI utility source |
+| `./plugin/zenfs/util/` | ZenFS CLI utility source |
 
 ---
 Follow the steps outlined in the link below:
