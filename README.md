@@ -206,6 +206,12 @@ rm -rf /home/femu/rocksdbTest/zenfs_aux/*
 
 echo mq-deadline | sudo tee /sys/class/block/nvme0n1/queue/scheduler
 
-bash db_bench_scripts/test_ft_single.sh
+./db_bench_scripts/test_ft_single.sh
+```
+
+If any permission issues, do:
+
+```bash
+chmod +x ./db_bench_scripts/test_ft_single.sh
 ```
 
